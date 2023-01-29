@@ -1,25 +1,31 @@
-import logo from './logo.svg';
-import './App.css';
+import {Canvas} from "@react-three/fiber";
+import {useGLTF, Stage, PresentationControls} from "@react-three/drei";
+import { OrbitControls } from '@react-three/drei'
+
+function Model(props){
+  const {scene } = useGLTF("/heart.glb");
+  return <primitive object={scene} {...props}/>
+ }
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <Canvas dpr={[1,2]} camera={{fov: 45}} style={{"position": "absolute"}}>
+      <color attach="background" args={["#101010"]}/>
+      
+      <OrbitControls />
+      <ambientLight intensity={0.5} />
+      <Model scale={0.05}/>
+
+
+       {/* <Stage environment={null}>
+          
+        </Stage> */}
+      
+      
+    </Canvas>
   );
 }
 
 export default App;
+
+
